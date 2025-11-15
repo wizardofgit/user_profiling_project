@@ -1,8 +1,6 @@
 # user_profiling_project
 The project utilizes a simple system for profilizing users and their posts via sentiment analysis to provide features for predicting LoL matches outcomes.
 
-Requires Python <= 3.9.
-
 # 📄 Database Schema (`sentiment.db`)
 
 All project data is stored in a **single SQLite database**:
