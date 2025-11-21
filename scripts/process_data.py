@@ -1,14 +1,15 @@
 from __future__ import annotations
-from pandas import DataFrame
-from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
-import torch
-import numpy as np
-import sqlite3
-import pandas as pd
+
 import json
+import sqlite3
 from pathlib import Path
 from typing import Any
+
+import pandas as pd
+import torch
+from pandas import DataFrame
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 # Load pre-trained RoBERTa model and tokenizer for sentiment analysis
 model_name = "cardiffnlp/twitter-roberta-base-sentiment"
@@ -60,10 +61,9 @@ def compute_roberta_sentiment(text: str) -> float:
 
     return compound_score
 
-def extract_tweets_from_json(file: str) -> pd.DataFrame:
+def extract_tweets_from_json(file_path: Path) -> pd.DataFrame:
     """Extract tweets from a JSON file and return as a DataFrame."""
-    DATA_PATH = Path(f"../data/{file}")
-    with DATA_PATH.open("r", encoding="utf-8") as f:
+    with file_path.open("r", encoding="utf-8") as f:
         tweets_json: list[dict[str, Any]] = json.load(f)
 
     # get rid of unnecessary fields and convert to DataFrame
